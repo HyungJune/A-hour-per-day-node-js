@@ -15,7 +15,7 @@ app.use(express.favicon());
 app.use(express.bodyParser());
 
 /* route setting for static file services */
-app.use(express.static(path.join(_dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 /* start server */
 app.start = app.lisen = function(){
@@ -34,11 +34,11 @@ function include(file_){
 };
 
 /* include config file */
-include(_dirname + "/config/include.js")
+include(__dirname + "/config/include.js")
 
 /* include service file */
 for(var i = 0; i < servicefile.length;i++){
-  include(_dirname + "/service/" + servicefile[i]);
+  include(__dirname + "/service/" + servicefile[i]);
 }
 
 /* process all http request */

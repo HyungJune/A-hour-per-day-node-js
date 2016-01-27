@@ -1,0 +1,118 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Chatting</title>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <linkrel="stylesheet" href="/stylesheets/style.css">
+  <script>
+    var roomlist = [];
+    var serverUrl = 'http://163.152.71.111:3000';
+    var socket = io.connect(serverUrl);
+    console.log(socket);
+    $(document).ready(function(){
+      //make room
+      $("#room_make").click(function(){
+        var data = {"roomname":$("#roomname").val(),"nickname":$("#nickname").val()};
+        socket.emit('roommake', data);
+        $("#roomname").val("");
+        nickname = $("#nickname").val();
+      });
+
+      //when loading the page, request room list
+      getRoomList();
+
+      socket.on('roomlist',function(data){
+        console.log("data = " + data);
+        //constructed room list
+        roomlist = [];
+
+        clientid = data.clientid;
+        data = data.roomdata;
+
+        for(var key in data){
+          if(key.indexOf("/") > -1){
+            var myroom = false;
+
+            for(var i = 0; i < data[key].length ; i++){
+              if(data[key][i] == io.sockets[serverUrl].sessionid)
+                myroom = true;
+            }
+            roomlist.push({"name":key.split("/").join(""),
+              count:data[key].length, myroom:myroom});
+          }
+        }
+        viewRoomlist(roomlist);
+      });
+    })
+
+    function getRoomList(){
+
+    	$.ajax({
+    		type: "get",
+    		dataType: "json",
+    		url: "/roomlist",
+    		success: function(data){
+    			console.log(data);
+    			roomlist = [];
+
+    			for(var key in data){
+    				if(key.indexOf("/") > -1){
+    					var myroom = false;
+    					for(var i = 0 ; i < data[key].length ; i++){
+    						if(data[key][i] == io.sockets[serverUrl].sessionid)
+    							myroom = true;
+    					}
+
+    					roomlist.push({"name":key.split("/").join(""),count:data[key].length,myroom:myroom});
+    				}
+    			}
+
+    			viewRoomlist(roomlist);
+    		},
+    		error: function(res){
+
+    		}
+    	});
+
+    }
+
+    function viewRoomlist(data){
+      //remove existing list
+      $("#roomlist li").remove();
+
+      //notice room list
+      for(var i=0;i<data.length;i++){
+        $("#roomlist").append("<li>방이름 :"+data[i].name + ", 참여자수 :"
+          + data[i].count+
+          ", 닉네임 : <input type= 'text'><input type= 'button' value = '입장하기' data-roomname='"
+           + data[i].name +"'></li>");
+      }
+
+      if(data.length < 1){
+        $("#roomlist").append("<li>생성된방이없습니다.</li>");
+      }else{
+        //set event handler
+        $("#roomlist li input[type=button]").click(function(){
+
+        });
+      }
+    }
+
+
+  </script>
+</head>
+<body>
+  <fieldset id="roommake">
+    <legend>방만들기</legend>
+    방이름 : <input id="roomname" type="text" value><br>
+    닉네임 : <input id="nickname" type="text" value><br>
+    <input id="room_make" type="button" value="방만들기">
+  </fieldset>
+  <fieldsetid="room">
+    <legend>개설된방목록</legend>
+    <div id="roomlist"><div>
+  </fieldset>
+</body>
+</html>

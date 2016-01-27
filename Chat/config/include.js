@@ -1,1 +1,6 @@
-servicefile = [file1,file2,];
+
+servicefile =
+[
+	"ChatServer.js",
+	"roomlist.js",
+];
