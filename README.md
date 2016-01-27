@@ -24,4 +24,13 @@ it is not work.
       ...
     ...
 
+It occurs the error in
 
+    ...
+    for(var i = 0; i < data[key].length; i++){
+        if(data[key][i] == io.sockets[serverUrl].sessionid)
+            myroom = true;
+    }
+    ...
+
+To fix it, I use my own PC IP address and it works. I don't know why it occurs and it is caused.
