@@ -7,4 +7,21 @@ It starts when I finish reading the section of websoket protocol and socket.IO m
  * 16/01/27 Simple Echo Project starts
  * 16/01/27 Simple Echo Project finished
 
-#16/01/27 Chat Project using WebSocket starts
+###Chat Project using Socket.io
+ * 16/01/27 Chat Project using WebSocket starts
+
+When I use the variant 'serverUrl' as localhost in the file 'public/chat.html',
+it is not work.
+
+  <html>
+  <head>
+  <meta charset="utf-8">
+  <title>Chatting</title>
+  ...
+  <script>
+    var roomlist = [];
+    var serverUrl = 'http://localhost:3000';
+    ...
+  ...
+
+
