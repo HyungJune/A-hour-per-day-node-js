@@ -13,15 +13,15 @@ It starts when I finish reading the section of websoket protocol and socket.IO m
 When I use the variant 'serverUrl' as localhost in the file 'public/chat.html',
 it is not work.
 
-  <html>
-  <head>
-  <meta charset="utf-8">
-  <title>Chatting</title>
-  ...
-  <script>
-    var roomlist = [];
-    var serverUrl = 'http://localhost:3000';
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>Chatting</title>
     ...
-  ...
+    <script>
+      var roomlist = [];
+      var serverUrl = 'http://localhost:3000';
+      ...
+    ...
 
 
