@@ -35,7 +35,9 @@ It occurs the error in
 
 To fix it, I use my own PC IP address and it works. I don't know why it occurs and is caused.
 
+[16/02/02] The above problem is casuded due to the version of socket.io module. I change the version 1.x to 0.9.
+
  * 16/02/02 Chat Project using WebSocket finished
 
-I uses socket.io and version 0.9
+I use socket.io and version 0.9
 
