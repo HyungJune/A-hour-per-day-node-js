@@ -34,3 +34,8 @@ It occurs the error in
     ...
 
 To fix it, I use my own PC IP address and it works. I don't know why it occurs and is caused.
+
+ * 16/02/02 Chat Project using WebSocket finished
+
+I uses socket.io and version 0.9
+
